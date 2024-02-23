@@ -1,14 +1,14 @@
 // imports here for express and pg
 const express = require('express');
-const app = express();
 const pg = require('pg');
 const path = require('path');
 
-const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/acme_notes_db');
+const app = express();
+const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/acme_notes_db')
 // static routes here (you only need these for deployment)
 app.use(express.static(path.join(__dirname, '../client/dist')));
 // app routes here
-app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../client/dist/index.html'))). 
+app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '../client/dist/index.html')));
 
 app.get('/api/notes', async (req, res, next) => {
   try {
